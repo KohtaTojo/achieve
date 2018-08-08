@@ -1,0 +1,22 @@
+%main.page
+  .clean-block.tweets
+    .container
+      .block-heading
+        %h2.text-info
+          呟き一覧
+      - @tweets.each do |tweet|
+        .tweet-block.block-content{style: "margin-top:10px;"}
+          .top.clearfix
+            .left-block
+              = tweet.name
+            .right-block
+              = link_to "編集", edit_tweet_path(tweet.id)
+              = link_to "削除", tweet_path(tweet.id), method: :delete, data: {confirm: "本当に削除していいですか?"}
+          .content-block
+            = tweet.content
+        / .block-content{style: "margin-top:10px;"}
+        /   .name
+        /     aaaaaa
+        / .block-content{style: "margin-top:10px;"}
+        /   .name
+        /     aaaaaa

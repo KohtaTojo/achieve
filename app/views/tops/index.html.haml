@@ -1,0 +1,7 @@
+%main.page.landing-page
+  %section.clean-block.clean-hero
+    .text
+      %h2{:style => "font-family:'Allerta Stencil', sans-serif;font-size:50px;"} Achieve
+      %p 練習のためのお試し呟きサイト
+      = link_to '呟き一覧を見る！', tweets_path, class: 'btn btn-outline-light btn-lg'
+      = link_to 'さっそく呟く！', new_tweet_path, class: 'btn btn-outline-light btn-lg'

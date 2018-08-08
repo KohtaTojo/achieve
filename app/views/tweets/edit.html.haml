@@ -1,0 +1,28 @@
+%main.page
+  .clean-block.tweet-edit
+    .container
+      .block-heading
+        %h2.text-info
+          呟き編集画面
+      = form_with(model: @tweet, local: true, url: choose_new_or_edit) do |form|
+        - if @tweet.errors.any?
+          #error_explanation
+            %h2
+              = @tweet.errors.count
+              件のエラーがあります。
+            %ul
+              - @tweet.errors.full_messages.each do |msg|
+                %li
+                  = msg
+        %form.block-content
+          .form-group
+            = form.label "名前"
+            = form.text_field :name, class:"form-control"
+            / %label 名前
+            / %input{type: "text",class: "form-control"}
+          .form-group{style: "padding-bottom:50px;"}
+            = form.label "内容"
+            = form.text_field :content, class:"form-control"
+            / %label 内容
+            / %input{type: "text",class: "form-control"}
+          = form.submit "呟く", class:"form-group btn btn-primary btn-block"
