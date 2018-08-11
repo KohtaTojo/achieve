@@ -7,14 +7,13 @@
           以下の内容で、送信する。
         .block-content{style: "margin-top:10px;"}
           = form_with(model: @tweet, url: tweets_path, local: true) do |form|
-            = form.hidden_field :name
+            / = form.hidden_field :name
             = form.hidden_field :content
-            %h3
-              名前: #{@tweet.name}
+            / %h3
+
             %h3
               本文: #{@tweet.content}
             = form.submit  "登録する", class:"form-group btn btn-primary btn-block"
           = form_with(model: @tweet, url: new_tweet_path, local: true, method: 'get') do |form|
-            = form.hidden_field :name
             = form.hidden_field :content
             = form.submit "戻る", name: 'back', class:"form-group btn btn-info btn-block"
