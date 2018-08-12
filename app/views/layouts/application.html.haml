@@ -29,6 +29,21 @@
             %li.nav-item{:role => "presentation"}
               = link_to "呟く", new_tweet_path, class: "nav-link"
               / %a.nav-link{:href => "features.html"} 呟く
+            - if logged_id?
+              %li.nav-item{:role => "presentation"}
+                = link_to "マイページ", user_path(current_user.id), class: "nav-link"
+              %li.nav-item{:role => "presentation"}
+                = link_to "ログアウト", session_path(current_user.id), method: :delete, class: "nav-link"
+            - else
+              %li.nav_item{:role => "presentation"}
+                = link_to "サインイン", new_user_path, class: "nav-link"
+              %li.nav_item{:role => "presentation"}
+                = link_to "ログイン", new_session_path, class: "nav-link"
+
+    - flash.each do |key, value|
+      - key = "info" if key == "notice"
+      - key = "danger" if key == "alert"
+      = content_tag :div, value, class: "alert alert-#{key}"
     = yield
     %footer.footer{style: "padding:20px 0;background-color:#222425; color:#7d8288;text-align: center; height: 80px;"}
       .container
