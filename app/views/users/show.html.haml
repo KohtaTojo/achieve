@@ -4,4 +4,47 @@
       .block-heading
         %h2.text-info
           #{@user.name}さんのページ！
-
+      %ul.nav.nav-tabs
+        %li.nav-item.col
+          %a.nav-link.active{"data-toggle" => "tab", :href => "#tab-1", :role => "tab"}
+            マイツイート
+        %li.nav-item.col
+          %a.nav-link{"data-toggle" => "tab", :href => "#tab-2", :role => "tab"}
+            お気に入り
+      .tab-content
+        #tab-1.tab-pane.active{:role => "tabpanel"}
+          - @tweets.each do |tweet|
+            .tweet-block.block-content{style: "margin-top:10px;"}
+              .top.clearfix
+                .left-block
+                  = link_to "#{tweet.user.name}", user_path(id: tweet.user.id), class: "user-name"
+                  - if tweet.favorite_user(current_user.id)
+                    = link_to favorite_path(id: tweet.favorite_user(current_user.id).id), method: :delete do
+                      = fa_icon "thumbs-up", class: "like-icon text-info"
+                  - else
+                    = link_to favorites_path(tweet_id: tweet.id), method: :post do
+                      = fa_icon "thumbs-up", class: "like-icon text-muted"
+                .right-block
+                  - if current_user.id == tweet.user.id
+                    = link_to "編集", edit_tweet_path(tweet.id)
+                    = link_to "削除", tweet_path(tweet.id), method: :delete, data: {confirm: "本当に削除していいですか?"}
+              .content-block
+                = tweet.content
+        #tab-2.tab-pane{:role => "tabpanel"}
+          - @user.favorites.each do |favo|
+            .tweet-block.block-content{style: "margin-top:10px;"}
+              .top.clearfix
+                .left-block
+                  = link_to "#{favo.tweet.user.name}", user_path(id: favo.tweet.user.id), class: "user-name"
+                  - if favo.tweet.favorite_user(current_user.id)
+                    = link_to favorite_path(id: favo.tweet.favorite_user(current_user.id).id), method: :delete do
+                      = fa_icon "thumbs-up", class: "like-icon text-info"
+                  - else
+                    = link_to favorites_path(tweet_id: favo.tweet.id), method: :post do
+                      = fa_icon "thumbs-up", class: "like-icon text-muted"
+                .right-block
+                  - if current_user.id == favo.tweet.user.id
+                    = link_to "編集", edit_tweet_path(favo.tweet.id)
+                    = link_to "削除", tweet_path(favo.tweet.id), method: :delete, data: {confirm: "本当に削除していいですか?"}
+              .content-block
+                = favo.tweet.content

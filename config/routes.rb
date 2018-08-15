@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'tops/index'
   root 'tops#index'
   resources 'tweets' do
     collection do
@@ -8,5 +7,6 @@ Rails.application.routes.draw do
   end
   resources "sessions", only: [:new, :create, :destroy]
   resources 'users'
+  resources 'favorites', only: [:create, :destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

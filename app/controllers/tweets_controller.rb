@@ -26,16 +26,23 @@ class TweetsController < ApplicationController
   end
 
   def update
-    if @tweet.update(tweet_params)
-      redirect_to tweets_path, confirm: "ツイートを編集しました"
+    if current_user.id == @tweet.user.id
+      if @tweet.update(tweet_params)
+        redirect_to tweets_path, confirm: "ツイートを編集しました"
+      else
+        render 'edit'
+      end
     else
-      render 'edit'
+      redirect_to tweets_path, warning: "編集できません"
     end
   end
-
   def destroy
-    @tweet.destroy
-    redirect_to tweets_path, confirm: "ブログを削除しました"
+    if current_user.id == @tweet.user.id
+      @tweet.destroy
+      redirect_to tweets_path, confirm: "ブログを削除しました"
+    else
+      redirect_to tweets_path, warning: "削除できません"
+    end
   end
 
   def confirm
@@ -45,7 +52,7 @@ class TweetsController < ApplicationController
 
   private
   def tweet_params
-    params.require(:tweet).permit(:content)
+    params.require(:tweet).permit(:content).merge(user_id: current_user.id)
   end
 
   def set_tweet
@@ -57,4 +64,5 @@ class TweetsController < ApplicationController
       redirect_to new_session_path, warning: "ログインしてください"
     end
   end
+
 end

@@ -8,15 +8,17 @@
         .tweet-block.block-content{style: "margin-top:10px;"}
           .top.clearfix
             .left-block
-              / = tweet.name
+              = link_to "#{tweet.user.name}", user_path(id: tweet.user.id), class: "user-name"
+              - if tweet.favorite_user(current_user.id)
+                = link_to favorite_path(id: tweet.favorite_user(current_user.id).id), method: :delete do
+                  = fa_icon "thumbs-up", class: "like-icon text-info"
+              - else
+                = link_to favorites_path(tweet_id: tweet.id), method: :post do
+                  = fa_icon "thumbs-up", class: "like-icon text-muted"
             .right-block
-              = link_to "編集", edit_tweet_path(tweet.id)
-              = link_to "削除", tweet_path(tweet.id), method: :delete, data: {confirm: "本当に削除していいですか?"}
+              - if current_user.id == tweet.user.id
+                = link_to "編集", edit_tweet_path(tweet.id), class: "edit-info"
+                = link_to "削除", tweet_path(tweet.id), method: :delete, data: {confirm: "本当に削除していいですか?"}, class: "delete-info"
           .content-block
             = tweet.content
-        / .block-content{style: "margin-top:10px;"}
-        /   .name
-        /     aaaaaa
-        / .block-content{style: "margin-top:10px;"}
-        /   .name
-        /     aaaaaa
+
