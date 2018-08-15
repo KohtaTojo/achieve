@@ -1,7 +1,0 @@
-- if logged_id?
-  - if tweet.favorite_user(current_user.id)
-    = button_to favorite_path(id: tweet.favorite_user(current_user.id).id), id: "like-button", method: :delete do
-      = fa_icon "thumbs-up", class: "like-icon text-info"
-  - else
-    = button_to favorites_path(tweet_id: tweet.id), id: "like-button", method: :post do
-      = fa_icon "thumbs-up", class: "like-icon text-muted"
