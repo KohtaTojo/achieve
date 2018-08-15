@@ -16,6 +16,7 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.new(tweet_params)
     if @tweet.save
+      ConfirmMailer.confirm_mail(@tweet).deliver
       redirect_to tweets_path
     else
       render 'new'
