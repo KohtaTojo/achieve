@@ -40,6 +40,7 @@ gem 'haml-rails'
 gem 'erb2haml'
 gem 'bootstrap'
 gem 'jquery-rails'
+gem 'bootstrap-sass'
 gem 'bcrypt', '3.1.11'
 gem 'font-awesome-rails'
 
