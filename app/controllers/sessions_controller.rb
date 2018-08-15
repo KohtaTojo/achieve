@@ -17,5 +17,4 @@ class SessionsController < ApplicationController
     session.delete(:user_id)
     redirect_to new_session_path, success: "ログアウトしました"
   end
-
 end
