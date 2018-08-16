@@ -3,6 +3,10 @@
     .container
       .block-heading
         %h2.text-info
+          - if @user.image.present?
+            = image_tag @user.image.url, class: "avatar"
+          - else
+            = fa_icon "user", class: "avatar text-muted"
           #{@user.name}さんのページ！
       %ul.nav.nav-tabs
         %li.nav-item.col

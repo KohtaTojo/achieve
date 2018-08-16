@@ -21,11 +21,13 @@
           = f.label :email
           = f.email_field :email, class: "form-control"
         .form-group
+          = f.label :image
+          = f.file_field :image, class: "form-control"
+        .form-group
           = f.label :password
           = f.password_field :password, class: "form-control"
         .form-group{style: "padding-bottom:50px;"}
           = f.label :password_confirmation
           = f.password_field :password_confirmation, class: "form-control"
-
         = f.submit "アカウントを作成する！", class:"form-group btn btn-primary btn-block"
 
