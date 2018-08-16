@@ -6,12 +6,12 @@
           呟き一覧
       - @tweets.each do |tweet|
         .tweet-block.block-content.clearfix.row{style: "margin-top:10px;"}
-          .left-image.col-xs-2.d-inline
+          .left-image.col-xs-2.col-md-2.d-inline
             - if tweet.user.image.present?
               = image_tag tweet.user.image.url, class: "avatar"
             - else
               = fa_icon "user", class: "avatar text-muted"
-          .right.col-xs-10.d-inline
+          .right.col-xs-10.col-md-10.d-inline
             .top.clearfix
               .left-block
                 = link_to "#{tweet.user.name}", user_path(id: tweet.user.id), class: "user-name"
@@ -27,6 +27,10 @@
                 - if current_user.present? && current_user.id == tweet.user.id
                   = link_to "編集", edit_tweet_path(tweet.id), class: "edit-info"
                   = link_to "削除", tweet_path(tweet.id), method: :delete, data: {confirm: "本当に削除していいですか?"}, class: "delete-info"
-            .content-block
-              = tweet.content
+            .bottom-block
+              - if tweet.image.present?
+                .image_block
+                  = image_tag tweet.image.url, class: "content-image"
+              .content_block
+                = tweet.content
 
