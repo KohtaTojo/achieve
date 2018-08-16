@@ -19,6 +19,6 @@
             = form.label :content, "内容"
             = form.text_field :content, class: "form-control"
             = form.label :image, "画像"
-            = form.file_field :image, class: "form-control"
             = image_tag(@tweet.image.url) if @tweet.image.url
+            = form.file_field :image, class: "form-control"
           = form.submit "呟く", class:"form-group btn btn-primary btn-block"
