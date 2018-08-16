@@ -15,15 +15,8 @@
                 %li
                   = msg
         %form.block-content
-          / .form-group
-          /   = form.label "名前"
-          /   = form.text_field :name, class:"form-control"
-          / %label 名前
-          / %input{type: "text",class: "form-control"}
           .form-group{style: "padding-bottom:50px;"}
-            = form.label "内容"
+            = form.label :content, "内容"
             = form.text_field :content, class:"form-control"
-            / %label 内容
-            / %input{type: "text",class: "form-control"}
           = form.submit "呟く", class:"form-group btn btn-primary btn-block"
 }
