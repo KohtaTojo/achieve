@@ -6,12 +6,12 @@
           呟き一覧
       - @tweets.each do |tweet|
         .tweet-block.block-content.clearfix.row{style: "margin-top:10px;"}
-          .left-image.col-sm-2.d-inline
+          .left-image.col-xs-2.d-inline
             - if tweet.user.image.present?
               = image_tag tweet.user.image.url, class: "avatar"
             - else
               = fa_icon "user", class: "avatar text-muted"
-          .right.col-sm-10.d-inline
+          .right.col-xs-10.d-inline
             .top.clearfix
               .left-block
                 = link_to "#{tweet.user.name}", user_path(id: tweet.user.id), class: "user-name"
