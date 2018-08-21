@@ -1,0 +1,33 @@
+%main.page
+  .clean-block.user-new
+    .container
+      .block-heading
+        %h2.text-info
+          アカウント作成画面
+      - if @user.errors.any?
+        #error_explanation
+          %h2
+            = pluralize(@user.errors.count, "error")
+            prohibited this @user aform being saved:
+          %ul
+            - @user.errors.full_messages.each do |message|
+              %li
+                = message
+      = form_with(model: @user, local: true, class: "block-content", html: {method: :put}) do |f|
+        .form-group
+          = f.label :name
+          = f.text_field :name, class: "form-control"
+        .form-group
+          = f.label :email
+          = f.email_field :email, class: "form-control"
+        .form-group
+          = f.label :image
+          = f.file_field :image, class: "form-control"
+        .form-group
+          = f.label :password
+          = f.password_field :password, autocomplete: "password", class: "form-control"
+        .form-group{style: "padding-bottom:50px;"}
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation, autocomlete: "password_confirmation", class: "form-control"
+        = f.submit "アカウントを更新する！", class:"form-group btn btn-primary btn-block"
+

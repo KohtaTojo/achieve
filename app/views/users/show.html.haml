@@ -8,6 +8,9 @@
           - else
             = fa_icon "user", class: "avatar text-muted"
           #{@user.name}さんのページ！
+        .text-bark
+          - if @user.id == current_user.id
+            = link_to "編集", edit_user_path(current_user.id)
       %ul.nav.nav-tabs
         %li.nav-item.col
           %a.nav-link.active{"data-toggle" => "tab", :href => "#tab-1", :role => "tab"}
