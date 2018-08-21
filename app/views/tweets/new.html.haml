@@ -21,4 +21,5 @@
             = form.label :image, "画像"
             = image_tag(@tweet.image.url) if @tweet.image.url
             = form.file_field :image, class: "form-control"
+            = form.hidden_field :image_cache, class: "form-control"
           = form.submit "呟く", class:"form-group btn btn-primary btn-block"

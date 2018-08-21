@@ -23,6 +23,9 @@
           .form-group{style: "padding-bottom:50px;"}
             = form.label "内容"
             = form.text_field :content, class:"form-control"
+            = image_tag(@tweet.image.url) if @tweet.image.url
+            = form.file_field :image, class: "form-control"
+            = form.hidden_field :image_cache, class: "form-control"
             / %label 内容
             / %input{type: "text",class: "form-control"}
           = form.submit "呟く", class:"form-group btn btn-primary btn-block"
